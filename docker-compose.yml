@@ -2,14 +2,15 @@ version: "3.9"
 
 services:
   db:
-    container_name: db
-    image: postgres
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
+    image: quay.io/maksymbilenko/oracle-12c
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - ORACLE_SID=xe
+      - ORACLE_USER=SYSTEM
+      - ORACLE_PWD=oracle
+      - DBCA_TOTAL_MEMORY=4096
+    ports:
+      - "8080:8080"
+      - "1521:1521"
   django:
     container_name: backend
     build:
