@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 unzip instantclient-basic-linux.x64-12.1.0.2.0.zip -d /opt/oracle
 unzip instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /opt/oracle
 mv /opt/oracle/instantclient_12_1 /opt/oracle/instantclient
