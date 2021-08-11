@@ -1,23 +1,24 @@
 <template>
-    <div id="components-layout-demo-basic">
-        <a-layout>
-            <a-layout-header>
-                <p><strong>Lista de Juegos</strong></p>
-            </a-layout-header>
-            <a-layout-content>
-                <a-card title="Juegos">
-                    <a-card v-for="game of data" v-bind:key="game.id">
-                        <p>{{ game.name }}</p>
-                        <span>Desarrollador: {{ game.developer }}</span>
-                        <br/>
-                        <span>Plataforma: {{ game.platform }}</span>
-                    </a-card>
-                    <br />
-                </a-card>
-            </a-layout-content>
-            <a-layout-footer>Epidata</a-layout-footer>
-        </a-layout>
-    </div>
+  <div class="q-pa-md row items-start q-gutter-md" v-if="!loading && data && data.length">
+    <q-card dark bordered class="bg-grey-9 my-card" v-for="game of data" v-bind:key="game.id">
+      <q-card-section>
+        <div class="text-h6">{{ game.name }}</div>
+        <div class="text-subtitle2">by {{ game.developer }}</div>
+      </q-card-section>
+
+      <q-separator dark inset />
+
+      <q-card-section>
+        {{ game.platform }}
+      </q-card-section>
+    </q-card>
+  </div>
+  <p v-if="loading">
+    Still Loading ...
+  </p>
+  <p v-if="error">
+    Error !!!
+  </p>
 </template>
 
 
@@ -66,6 +67,7 @@ export default {
             error.value.message = json.message;
             });
           }
+          loading.value = false;
         });
     }
 
@@ -83,33 +85,8 @@ export default {
 }
 </script>
 
-<style>
-#components-layout-demo-basic {
-  text-align: center;
-}
-#components-layout-demo-basic .ant-layout-header,
-#components-layout-demo-basic .ant-layout-footer {
-  background: #7dbcea;
-  color: #fff;
-}
-#components-layout-demo-basic .ant-layout-footer {
-  line-height: 1.5;
-}
-#components-layout-demo-basic .ant-layout-sider {
-  background: #3ba0e9;
-  color: #fff;
-  line-height: 120px;
-}
-#components-layout-demo-basic .ant-layout-content {
-  background: rgba(16, 142, 233, 1);
-  color: #fff;
-  min-height: 120px;
-  line-height: 120px;
-}
-#components-layout-demo-basic > .ant-layout {
-  margin-bottom: 48px;
-}
-#components-layout-demo-basic > .ant-layout:last-child {
-  margin: 0;
-}
+<style lang="sass" scoped>
+.my-card
+  width: 100%
+  max-width: 250px
 </style>
