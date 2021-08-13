@@ -19,9 +19,13 @@ ENV OCI_HOME=/opt/oracle/instantclient
 ENV OCI_LIB_DIR=/opt/oracle/instantclient
 ENV OCI_INCLUDE_DIR=/opt/oracle/instantclient/sdk/include
 
-RUN ./install-instantclient.sh && pip install -r requirements.txt
+RUN chmod +x install-instantclient.sh
+RUN /bin/sh ./install-instantclient.sh
+RUN pip install -r requirements.txt
 
 WORKDIR /code
 COPY scripts/start.sh /
-COPY .. /code/
+COPY . /code/
+
+RUN chmod +x scripts/start.sh
 
